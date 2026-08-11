@@ -1,0 +1,13 @@
+{
+  "name": "kapture-collections-mock-server",
+  "version": "1.0.0",
+  "description": "Mock webhook server for Kapture Collections Voice AI Agent",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
