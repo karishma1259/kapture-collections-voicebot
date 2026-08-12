@@ -1,0 +1,133 @@
+{
+  "tools": [
+    {
+      "name": "verify_customer",
+      "description": "Verify the customer's identity before discussing any account or payment information.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "Customer account ID."
+          },
+          "verification_code": {
+            "type": "string",
+            "description": "Customer verification code."
+          }
+        },
+        "required": [
+          "account_id",
+          "verification_code"
+        ]
+      }
+    },
+    {
+      "name": "log_promise_to_pay",
+      "description": "Record a customer's Promise to Pay for a specific date and amount.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "Customer account ID."
+          },
+          "ptp_date": {
+            "type": "string",
+            "description": "Date the customer promises to pay, in YYYY-MM-DD format."
+          },
+          "amount": {
+            "type": "number",
+            "description": "Amount the customer promises to pay."
+          }
+        },
+        "required": [
+          "account_id",
+          "ptp_date",
+          "amount"
+        ]
+      }
+    },
+    {
+      "name": "send_payment_link",
+      "description": "Send a payment link to the customer through the requested channel.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "Customer account ID."
+          },
+          "channel": {
+            "type": "string",
+            "enum": [
+              "SMS",
+              "WHATSAPP"
+            ],
+            "description": "Channel through which the payment link should be sent."
+          }
+        },
+        "required": [
+          "account_id",
+          "channel"
+        ]
+      }
+    },
+    {
+      "name": "mark_disposition",
+      "description": "Record the final outcome of the collections call.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "Customer account ID."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PTP_AGREED",
+              "ALREADY_PAID",
+              "DO_NOT_CALL",
+              "WRONG_PERSON"
+            ],
+            "description": "Final disposition status."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Notes describing the outcome of the conversation."
+          }
+        },
+        "required": [
+          "account_id",
+          "status",
+          "notes"
+        ]
+      }
+    },
+    {
+      "name": "escalate_to_agent",
+      "description": "Escalate the customer to a human agent when the issue cannot be safely resolved by the voice assistant.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "Customer account ID."
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "DISPUTE",
+              "HARDSHIP_REQUEST"
+            ],
+            "description": "Reason for escalation."
+          }
+        },
+        "required": [
+          "account_id",
+          "reason"
+        ]
+      }
+    }
+  ]
+}
